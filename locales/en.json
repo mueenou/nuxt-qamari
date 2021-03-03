@@ -1,0 +1,13 @@
+{
+    "welcomeMessage":
+        "Assalamu Alaykum, this site allows you to search for verses in the Quran containing a specific word in French and in English. <br />May it be beneficial for you 🤲",
+    "namesTitle": "Allah's 99 most wonderful names",
+    "foundWordsCount": "We have found {count} results",
+    "foundWordCount": "We have found {count} result",
+    "search": "Search",
+    "searchPlaceholder": "Try 'path'",
+    "navbar": {
+        "findWord": "Find your word",
+        "godNames": "Allah's names"
+    }
+}

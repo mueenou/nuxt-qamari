@@ -1,0 +1,13 @@
+{
+    "welcomeMessage":
+        "Assalamu Alaykum, ce site permet de chercher des versets dans le Coran contenant un mot précis en français et en anglais. <br />Que cela soit bénéfique pour vous 🤲",
+    "namesTitle": "Les 99 plus beaux noms d'Allah",
+    "foundWordsCount": "Nous avons trouvé {count} résultats",
+    "foundWordCount": "Nous avons trouvé {count} résultat",
+    "search": "Rechercher",
+    "searchPlaceholder": "Essayez 'chemin'",
+    "navbar": {
+        "findWord": "Trouve ton mot",
+        "godNames": "Les noms d'Allah"
+    }
+}

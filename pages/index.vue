@@ -1,0 +1,185 @@
+<template>
+  <div class="">
+    <div class="p-3 pb-9">
+      <div class="flex space-x-3">
+        <input
+          v-model="search"
+          class="w-full rounded border p-2 focus:outline-none"
+          type="text"
+          :placeholder="$t('searchPlaceholder')"
+          @keyup.enter="fetchVerses"
+        />
+        <button
+          class="bg-green-600 hover:bg-green-500 rounded text-white p-2 pl-4 pr-4 focus:outline-none"
+          @click="fetchVerses"
+        >
+          <p class="font-semibold text-xs">{{ $t('search') }}</p>
+        </button>
+      </div>
+    </div>
+    <div v-if="responses[0] == null" class="space-y-3 pl-7 pr-7 pb-7">
+      <div class="text-center">
+        <span class="text-red-600">{{ errorMessage }}</span>
+      </div>
+      <div class="bg-white p-6 border rounded-lg items-center">
+        <p class="text-gray-600 text-center" v-html="$t('welcomeMessage')"></p>
+      </div>
+    </div>
+    <div v-else class="space-y-3 text-center pl-7 pr-7 pb-7">
+      <h1 v-if="count == 1">{{ $t('foundWordCount', { count: count }) }}</h1>
+      <h1 v-else>{{ $t('foundWordsCount', { count: count }) }}</h1>
+      <div
+        v-for="(response, index) in responses"
+        :key="index"
+        class="bg-white p-6 border rounded-lg items-center"
+      >
+        <h1 class="text-xl font-medium text-gray-700 pb-3">
+          Sourate {{ response.surah.number }} -
+          {{ response.surah.englishName }} - {{ response.surah.name }}
+        </h1>
+        <h2>Verset {{ response.numberInSurah }}</h2>
+        <blockquote
+          class="font-dancing-script text-gray-800 text-xl mt-2"
+          v-html="highlightWords(response.text)"
+        ></blockquote>
+        <p class="pt-3 font-thin text-xs">
+          Traduit par
+          <span class="font-medium">{{ response.edition.englishName }}</span>
+        </p>
+        <div class="pt-5 md:flex md:justify-center md:space-x-3">
+          <div class="pt-3">
+            <audio controls preload="none" class="focus:outline-none">
+              <source
+                :src="getAudioUrl($store.state.lang, response.number)"
+                type="audio/mpeg"
+              />
+            </audio>
+            <p class="pt-1 font-thin text-xs">
+              Récité en {{ $store.state.reciterLang }} par
+              <span class="font-medium">{{ $store.state.reciter }}</span>
+            </p>
+          </div>
+          <div class="pt-3">
+            <audio controls preload="none" class="focus:outline-none">
+              <source
+                :src="getAudioUrl('ar', response.number)"
+                type="audio/mpeg"
+              />
+            </audio>
+            <p class="pt-1 font-thin text-xs">
+              Récité en Arabe par
+              <span class="font-medium">Alafasy</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Home',
+  data() {
+    return {
+      search: '',
+      responses: {},
+      count: null,
+      errorMessage: '',
+    }
+  },
+  methods: {
+    async fetchVerses() {
+      this.responses = {}
+      this.count = null
+      try {
+        await this.$store.commit('SET_SEARCH', this.search)
+        const data = await this.$store.dispatch('fetchVerses', this.search)
+        this.errorMessage = ''
+        this.responses = data.matches
+        this.count = data.count
+      } catch (error) {
+        if (this.$store.state.lang === 'fr') {
+          this.errorMessage = 'Ce mot est introuvable'
+        }
+        if (this.$store.state.lang === 'en') {
+          this.errorMessage = 'Cannot find this word'
+        }
+      }
+    },
+    highlightWords(data) {
+      const text = this.slugify(data)
+      const searchedWord = this.slugify(this.search)
+      const index = text.toLowerCase().indexOf(searchedWord)
+      if (index >= 0) {
+        return (
+          data.substring(0, index) +
+          "<span class='highlight bg-black text-green-400 px-1 rounded'>" +
+          text.substring(index, index + searchedWord.length) +
+          '</span>' +
+          data.substring(index + this.search.length, text.length)
+        )
+      }
+    },
+    // fonction permettant d'enlever tous les accents pour faciliter la recherche des mots dans les versets
+    slugify(str) {
+      const map = {
+        '-': ' ',
+        // eslint-disable-next-line no-dupe-keys
+        '-': '_',
+        a: 'á|à|ã|â|À|Á|Ã|Â',
+        e: 'é|è|ê|É|È|Ê',
+        i: 'í|ì|î|Í|Ì|Î',
+        o: 'ó|ò|ô|õ|Ó|Ò|Ô|Õ',
+        u: 'ú|ù|û|ü|Ú|Ù|Û|Ü',
+        c: 'ç|Ç',
+        n: 'ñ|Ñ',
+      }
+
+      for (const pattern in map) {
+        str = str.replace(new RegExp(map[pattern], 'g'), pattern)
+      }
+
+      return str
+    },
+    getAudioUrl(lang, number) {
+      if (lang === 'fr')
+        return 'http://cdn.alquran.cloud/media/audio/ayah/fr.leclerc/' + number
+      else if (lang === 'en')
+        return 'http://cdn.alquran.cloud/media/audio/ayah/en.walk/' + number
+      else
+        return 'http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/' + number
+    },
+  },
+}
+</script>
+
+<style scoped>
+.toggle__dot {
+  top: -0.25rem;
+  left: -0.25rem;
+  transition: all 0.3s ease-in-out;
+  background-image: url('../assets/fr.png');
+  background-size: 100%;
+}
+
+input:checked ~ .toggle__dot {
+  transform: translateX(100%);
+  background-image: url('../assets/uk.png');
+  background-size: 100%;
+}
+</style>
+
+<style>
+.highlight {
+  font-weight: bold;
+}
+
+.font-dancing-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-kaushan-script {
+  font-family: 'Kaushan Script', cursive;
+}
+</style>
