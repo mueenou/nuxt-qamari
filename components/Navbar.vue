@@ -47,10 +47,13 @@
       >
       <nuxt-link
         :to="localePath('/names')"
-        class="block px-4 py-1 mr-2 rounded bg-green-600 text-black font-semibold hover:bg-green-200 sm:mt-0"
+        class="block px-4 py-1 mt-1 mx-1 rounded bg-green-600 text-black font-semibold hover:bg-green-200 sm:mt-0"
         >{{ $t('navbar.godNames') }}</nuxt-link
       >
-      <label for="toogleA" class="flex mx-auto items-center cursor-pointer">
+      <label
+        for="toogleA"
+        class="flex mx-auto items-center cursor-pointer mt-1"
+      >
         <div class="mr-3 text-green-600 font-medium">FR</div>
         <div class="relative">
           <input

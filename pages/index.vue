@@ -46,7 +46,9 @@
           Traduit par
           <span class="font-medium">{{ response.edition.englishName }}</span>
         </p>
-        <div class="pt-5 md:flex md:justify-center md:space-x-3">
+        <div
+          class="pt-5 flex justify-center flex-wrap sm:flex-wrap md:flex-wrap md:space-x-3"
+        >
           <div class="pt-3">
             <audio controls preload="none" class="focus:outline-none">
               <source

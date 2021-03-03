@@ -7,7 +7,7 @@
       <figure
         v-for="(name, index) in allNames"
         :key="index"
-        class="bg-white shadow-sm border-gray-200 border flex flex-col justify-center w-3/12 rounded-xl p-2 h-36 w-22 my-2 mx-1"
+        class="bg-white shadow-sm border-gray-200 border flex flex-col justify-center lg:w-3/12 rounded-xl p-2 h-36 md:mx-1 lg:mx-2 my-2 w-10/12 xs:w-5/12 sm:w-5/12 sm:flex-wrap"
       >
         <blockquote class="text-xl font-bold">{{ name.name }}</blockquote>
         <blockquote class="font-bold">{{ name.transliteration }}</blockquote>
