@@ -1,7 +1,7 @@
 export const getters = {}
 
 export const state = () => ({
-  title: 'Ismoon',
+  title: 'The Hira Mount',
   langChange: false,
   lang: 'fr',
   reciterLang: 'Français',
