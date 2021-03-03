@@ -8,6 +8,27 @@
         :to="localePath('/')"
         >{{ $store.state.title }}</nuxt-link
       >
+      <label
+        for="toogleA"
+        class="flex mx-auto items-center cursor-pointer mt-1 ml-2"
+      >
+        <div class="mr-3 text-green-600 font-medium">FR</div>
+        <div class="relative">
+          <input
+            id="toogleA"
+            type="checkbox"
+            class="hidden"
+            @change="changeLang()"
+          />
+          <div
+            class="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"
+          ></div>
+          <div
+            class="toggle__dot absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 left-0"
+          ></div>
+        </div>
+        <div class="ml-3 text-green-600 font-medium">EN</div>
+      </label>
       <div class="sm:hidden">
         <button
           type="button"
@@ -50,27 +71,6 @@
         class="block px-4 py-1 mt-1 mx-1 rounded bg-green-600 text-black font-semibold hover:bg-green-200 sm:mt-0"
         >{{ $t('navbar.godNames') }}</nuxt-link
       >
-      <label
-        for="toogleA"
-        class="flex mx-auto items-center cursor-pointer mt-1"
-      >
-        <div class="mr-3 text-green-600 font-medium">FR</div>
-        <div class="relative">
-          <input
-            id="toogleA"
-            type="checkbox"
-            class="hidden"
-            @change="changeLang()"
-          />
-          <div
-            class="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"
-          ></div>
-          <div
-            class="toggle__dot absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 left-0"
-          ></div>
-        </div>
-        <div class="ml-3 text-green-600 font-medium">EN</div>
-      </label>
     </div>
   </header>
 </template>

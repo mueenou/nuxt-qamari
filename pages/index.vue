@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="p-3 pb-9">
-      <div class="flex space-x-3">
+      <div class="flex space-x-3 items-center">
         <input
           v-model="search"
           class="w-full rounded border p-2 focus:outline-none"
@@ -96,7 +96,10 @@ export default {
       this.count = null
       try {
         await this.$store.commit('SET_SEARCH', this.search)
-        const data = await this.$store.dispatch('fetchVerses', this.search)
+        const data = await this.$store.dispatch(
+          'fetchVerses',
+          this.search.toLowerCase()
+        )
         this.errorMessage = ''
         this.responses = data.matches
         this.count = data.count
@@ -110,14 +113,14 @@ export default {
       }
     },
     highlightWords(data) {
-      const text = this.slugify(data)
-      const searchedWord = this.slugify(this.search)
+      const text = this.slugify(data.toLowerCase())
+      const searchedWord = this.slugify(this.search.toLowerCase())
       const index = text.toLowerCase().indexOf(searchedWord)
       if (index >= 0) {
         return (
           data.substring(0, index) +
           "<span class='highlight bg-black text-green-400 px-1 rounded'>" +
-          text.substring(index, index + searchedWord.length) +
+          data.substring(index, index + searchedWord.length) +
           '</span>' +
           data.substring(index + this.search.length, text.length)
         )
