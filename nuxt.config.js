@@ -2,7 +2,6 @@ import en from './locales/en.json'
 import fr from './locales/fr.json'
 
 export default {
-  target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Qamari',
