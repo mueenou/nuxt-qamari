@@ -1,4 +1,4 @@
-# Qamari
+# The Hira Mount
 
 ## Build Setup
 
