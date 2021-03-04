@@ -10,10 +10,12 @@
       >
       <div class="relative ml-2">
         <button
-          class="relative px-4 py-1 z-10 block rounded font-semibold bg-white px-1 focus:outline-none"
+          class="relative w-6 h-6 rounded-full z-10 block rounded font-semibold bg-white focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"
         >
-          Langue
+          <div
+            :class="`toggle__dot_${$store.state.lang} w-6 h-6 rounded-full`"
+          ></div>
         </button>
 
         <div
@@ -121,7 +123,7 @@ export default {
 
 <style scoped>
 .lang-dropdown {
-  left: -50px;
+  left: -80px;
 }
 
 .toggle__dot_fr {
