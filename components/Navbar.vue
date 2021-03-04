@@ -106,6 +106,7 @@ export default {
   },
   methods: {
     changeLang(language) {
+      this.dropdownOpen = false
       switch (language) {
         case 'en':
           this.$router.push({ path: '/en' })

@@ -43,9 +43,27 @@
           v-html="highlightWords(response.text)"
         ></blockquote>
         <p class="pt-3 font-thin text-xs">
-          Traduit par
+          {{ $t('translateBy') }}
           <span class="font-medium">{{ response.edition.englishName }}</span>
         </p>
+        <button
+          class="border rounded p-1 focus:outline-none font-thin hover:bg-gray-200 mt-2 mb-4"
+          @click="
+            getArabicVerse(response.surah.number, response.numberInSurah, index)
+          "
+        >
+          {{ $t('showArabicVerse') }}
+        </button>
+        <blockquote
+          v-if="showArabicVerse === index"
+          class="text-2xl text-gray-700 font-thin"
+        >
+          {{ thisVerse }}
+          <p class="pt-3 font-thin text-xs">
+            Venant de
+            <span class="font-medium">Quran.com API</span>
+          </p>
+        </blockquote>
         <div
           class="pt-5 flex justify-center flex-wrap sm:flex-wrap md:flex-wrap md:space-x-3"
         >
@@ -57,7 +75,7 @@
               />
             </audio>
             <p class="pt-1 font-thin text-xs">
-              Récité en {{ $store.state.reciterLang }} par
+              {{ $t('recitedByLang') }}
               <span class="font-medium">{{ $store.state.reciter }}</span>
             </p>
           </div>
@@ -69,7 +87,7 @@
               />
             </audio>
             <p class="pt-1 font-thin text-xs">
-              Récité en Arabe par
+              {{ $t('recitedByArabic') }}
               <span class="font-medium">Alafasy</span>
             </p>
           </div>
@@ -88,6 +106,8 @@ export default {
       responses: {},
       count: null,
       errorMessage: '',
+      showArabicVerse: null,
+      thisVerse: '',
     }
   },
   methods: {
@@ -100,6 +120,7 @@ export default {
           'fetchVerses',
           this.search.toLowerCase()
         )
+        console.log(data.matches)
         this.errorMessage = ''
         this.responses = data.matches
         this.count = data.count
@@ -110,6 +131,26 @@ export default {
         if (this.$store.state.lang === 'en') {
           this.errorMessage = 'Cannot find this word'
         }
+      }
+    },
+
+    async getArabicVerse(surah, verse, index) {
+      if (this.showArabicVerse === null) {
+        this.showArabicVerse = index
+        try {
+          const res = await this.$axios.$get(
+            'https://api.quran.com/api/v4/quran/verses/imlaei?verse_key=' +
+              surah +
+              '%3A' +
+              verse
+          )
+          console.log(res.verses[0].text_imlaei)
+          this.thisVerse = res.verses[0].text_imlaei
+        } catch (error) {
+          console.log("can't find any response", error)
+        }
+      } else {
+        this.showArabicVerse = null
       }
     },
     highlightWords(data) {

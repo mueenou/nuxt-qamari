@@ -9,5 +9,9 @@
     "navbar": {
         "findWord": "Find your word",
         "godNames": "Allah's names"
-    }
+    },
+    "showArabicVerse": "Read it in arabic",
+    "translateBy": "Translated by",
+    "recitedByLang": "Recited in english by",
+    "recitedByArabic":"Recited in arabic by"
 }
