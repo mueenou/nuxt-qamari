@@ -8,27 +8,46 @@
         :to="localePath('/')"
         >{{ $store.state.title }}</nuxt-link
       >
-      <label
-        for="toogleA"
-        class="flex mx-auto items-center cursor-pointer mt-1 ml-2"
-      >
-        <div class="mr-3 text-green-600 font-medium">FR</div>
-        <div class="relative">
-          <input
-            id="toogleA"
-            type="checkbox"
-            class="hidden"
-            @change="changeLang()"
-          />
-          <div
-            class="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"
-          ></div>
-          <div
-            class="toggle__dot absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 left-0"
-          ></div>
+      <div class="relative ml-2">
+        <button
+          class="relative px-4 py-1 z-10 block rounded font-semibold bg-white px-1 focus:outline-none"
+          @click="dropdownOpen = !dropdownOpen"
+        >
+          Langue
+        </button>
+
+        <div
+          v-if="dropdownOpen"
+          class="fixed inset-0 h-full w-full z-10"
+          @click="dropdownOpen = false"
+        ></div>
+
+        <div
+          v-if="dropdownOpen"
+          class="lang-dropdown absolute mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+        >
+          <a
+            href="#"
+            class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-green-500 hover:text-white"
+            @click="changeLang('fr')"
+          >
+            <div
+              class="toggle__dot_fr w-4 h-4 bg-gray-400 rounded-full shadow-inner"
+            ></div>
+            Français
+          </a>
+          <a
+            href="#"
+            class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-green-500 hover:text-white"
+            @click="changeLang('en')"
+          >
+            <div
+              class="toggle__dot_en w-4 h-4 bg-gray-400 rounded-full shadow-inner"
+            ></div>
+            Anglais
+          </a>
         </div>
-        <div class="ml-3 text-green-600 font-medium">EN</div>
-      </label>
+      </div>
       <div class="sm:hidden">
         <button
           type="button"
@@ -80,16 +99,20 @@ export default {
   data() {
     return {
       isOpen: false,
+      dropdownOpen: false,
     }
   },
   methods: {
-    changeLang() {
-      if (!this.$store.state.langChange) {
-        this.$router.push({ path: '/en' })
-        this.$store.commit('CHANGE_LANG', 'en')
-      } else {
-        this.$router.push({ path: '/' })
-        this.$store.commit('CHANGE_LANG', 'fr')
+    changeLang(language) {
+      switch (language) {
+        case 'en':
+          this.$router.push({ path: '/en' })
+          this.$store.commit('CHANGE_LANG', language)
+          break
+
+        case 'fr':
+          this.$router.push({ path: '/' })
+          this.$store.commit('CHANGE_LANG', 'fr')
       }
     },
   },
@@ -97,16 +120,16 @@ export default {
 </script>
 
 <style scoped>
-.toggle__dot {
-  top: -0.25rem;
-  left: -0.25rem;
-  transition: all 0.3s ease-in-out;
+.lang-dropdown {
+  left: -50px;
+}
+
+.toggle__dot_fr {
   background-image: url('../assets/fr.png');
   background-size: 100%;
 }
 
-input:checked ~ .toggle__dot {
-  transform: translateX(100%);
+.toggle__dot_en {
   background-image: url('../assets/uk.png');
   background-size: 100%;
 }
