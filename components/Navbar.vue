@@ -1,10 +1,8 @@
 <template>
-  <header
-    class="bg-gray-900 shadow-md sm:flex sm:justify-between sm:px-4 sm:py-3"
-  >
+  <header class="bg-white border-b sm:flex sm:justify-between sm:px-4 sm:py-3">
     <div class="flex justify-between items-center px-4 py-3 sm:p-0">
       <nuxt-link
-        class="font-kaushan-script text-xl text-black tracking-widest font-bold p-2 rounded shadow-medium bg-green-600"
+        class="font-kaushan-script text-xl text-yellow-600 tracking-widest font-bold p-2 rounded shadow-medium"
         :to="localePath('/')"
         >{{ $store.state.title }}</nuxt-link
       >
@@ -57,7 +55,7 @@
           @click="isOpen = !isOpen"
         >
           <svg
-            class="h-6 w-6 text-gray-500 hover:text-white"
+            class="h-6 w-6 text-yellow-500 hover:text-yellow-600"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -83,13 +81,15 @@
       class="px-2 pt-2 pb-4 sm:flex sm:p-0 sm:items-center sm:px-2"
     >
       <nuxt-link
-        class="block px-4 py-1 mt-1 mx-1 rounded bg-green-600 text-black font-semibold hover:bg-green-200 sm:mt-0"
+        class="block px-4 py-1 mt-1 mx-1 rounded text-black font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
         :to="localePath('/')"
+        @click.native="isOpen = false"
         >{{ $t('navbar.findWord') }}</nuxt-link
       >
       <nuxt-link
         :to="localePath('/names')"
-        class="block px-4 py-1 mt-1 mx-1 rounded bg-green-600 text-black font-semibold hover:bg-green-200 sm:mt-0"
+        class="block px-4 py-1 mt-1 mx-1 rounded text-black font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
+        @click.native="isOpen = false"
         >{{ $t('navbar.godNames') }}</nuxt-link
       >
     </div>

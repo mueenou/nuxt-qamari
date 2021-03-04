@@ -4,16 +4,16 @@
       <div class="flex space-x-3 items-center">
         <input
           v-model="search"
-          class="w-full rounded border p-2 focus:outline-none"
+          class="w-full rounded border border-yellow-500 p-2 focus:outline-none"
           type="text"
           :placeholder="$t('searchPlaceholder')"
           @keyup.enter="fetchVerses"
         />
         <button
-          class="bg-green-600 hover:bg-green-500 rounded text-white p-2 pl-4 pr-4 focus:outline-none"
+          class="border rounded bg-white border-yellow-500 p-2 focus:outline-none font-thin hover:bg-gray-200"
           @click="fetchVerses"
         >
-          <p class="font-semibold text-xs">{{ $t('search') }}</p>
+          <p class="font-thin text-sm">{{ $t('search') }}</p>
         </button>
       </div>
     </div>
@@ -39,7 +39,7 @@
         </h1>
         <h2>Verset {{ response.numberInSurah }}</h2>
         <blockquote
-          class="font-dancing-script text-gray-800 text-xl mt-2"
+          class="font-dancing-script text-yellow-600 text-xl mt-2"
           v-html="highlightWords(response.text)"
         ></blockquote>
         <p class="pt-3 font-thin text-xs">
@@ -47,7 +47,7 @@
           <span class="font-medium">{{ response.edition.englishName }}</span>
         </p>
         <button
-          class="border rounded p-1 focus:outline-none font-thin hover:bg-gray-200 mt-2 mb-4"
+          class="border rounded p-1 border-yellow-500 focus:outline-none font-thin hover:bg-gray-200 mt-2 mb-4"
           @click="
             getArabicVerse(response.surah.number, response.numberInSurah, index)
           "
@@ -56,10 +56,10 @@
         </button>
         <blockquote
           v-if="showArabicVerse === index"
-          class="text-2xl text-gray-700 font-thin"
+          class="text-2xl text-yellow-600 font-thin"
         >
           {{ thisVerse }}
-          <p class="pt-3 font-thin text-xs">
+          <p class="pt-3 font-thin text-xs text-black">
             Venant de
             <span class="font-medium">Quran.com API</span>
           </p>
@@ -159,7 +159,7 @@ export default {
         if (index >= 0) {
           return (
             data.substring(0, index) +
-            "<span class='highlight bg-black text-green-400 px-1 rounded'>" +
+            "<span class='highlight bg-black text-yellow-400 px-1 rounded'>" +
             data.substring(index, index + searchedWord.length) +
             '</span>' +
             data.substring(index + this.search.length, text.length)
