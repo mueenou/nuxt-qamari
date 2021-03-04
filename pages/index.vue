@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="main">
     <div class="p-3 pb-9">
       <div class="flex space-x-3 items-center">
         <input
@@ -120,7 +120,6 @@ export default {
           'fetchVerses',
           this.search.toLowerCase()
         )
-        console.log(data.matches)
         this.errorMessage = ''
         this.responses = data.matches
         this.count = data.count
@@ -144,7 +143,6 @@ export default {
               '%3A' +
               verse
           )
-          console.log(res.verses[0].text_imlaei)
           this.thisVerse = res.verses[0].text_imlaei
         } catch (error) {
           console.log("can't find any response", error)
@@ -157,14 +155,18 @@ export default {
       const text = this.slugify(data.toLowerCase())
       const searchedWord = this.slugify(this.search.toLowerCase())
       const index = text.toLowerCase().indexOf(searchedWord)
-      if (index >= 0) {
-        return (
-          data.substring(0, index) +
-          "<span class='highlight bg-black text-green-400 px-1 rounded'>" +
-          data.substring(index, index + searchedWord.length) +
-          '</span>' +
-          data.substring(index + this.search.length, text.length)
-        )
+      if (this.search.length > 0) {
+        if (index >= 0) {
+          return (
+            data.substring(0, index) +
+            "<span class='highlight bg-black text-green-400 px-1 rounded'>" +
+            data.substring(index, index + searchedWord.length) +
+            '</span>' +
+            data.substring(index + this.search.length, text.length)
+          )
+        }
+      } else {
+        return data
       }
     },
     // fonction permettant d'enlever tous les accents pour faciliter la recherche des mots dans les versets
@@ -213,6 +215,11 @@ input:checked ~ .toggle__dot {
   transform: translateX(100%);
   background-image: url('../assets/uk.png');
   background-size: 100%;
+}
+
+.page-top-btn {
+  right: 0;
+  bottom: 10px;
 }
 </style>
 
