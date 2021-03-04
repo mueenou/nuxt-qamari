@@ -135,7 +135,7 @@ export default {
     },
 
     async getArabicVerse(surah, verse, index) {
-      if (this.showArabicVerse === null) {
+      if (this.showArabicVerse === null || this.showArabicVerse !== index) {
         this.showArabicVerse = index
         try {
           const res = await this.$axios.$get(
