@@ -164,7 +164,7 @@ export default {
             '</span>' +
             data.substring(index + this.search.length, text.length)
           )
-        }
+        } else return data
       } else {
         return data
       }
