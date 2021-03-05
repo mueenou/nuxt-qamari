@@ -54,16 +54,18 @@
         >
           {{ $t('showArabicVerse') }}
         </button>
-        <blockquote
-          v-if="showArabicVerse === index"
-          class="text-2xl text-yellow-600 font-thin"
-        >
-          {{ thisVerse }}
-          <p class="pt-3 font-thin text-xs text-black">
-            Venant de
-            <span class="font-medium">Quran.com API</span>
-          </p>
-        </blockquote>
+        <transition name="slide-fade">
+          <blockquote
+            v-if="showArabicVerse === index"
+            class="text-2xl text-yellow-600 font-thin"
+          >
+            {{ thisVerse }}
+            <p class="pt-3 font-thin text-xs text-black">
+              Venant de
+              <span class="font-medium">Quran.com API</span>
+            </p>
+          </blockquote>
+        </transition>
         <div
           class="pt-5 flex justify-center flex-wrap sm:flex-wrap md:flex-wrap md:space-x-3"
         >
@@ -221,9 +223,24 @@ input:checked ~ .toggle__dot {
   right: 0;
   bottom: 10px;
 }
+
 input::placeholder {
   font-weight: lighter;
   font-size: 0.8rem;
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all 0.5s;
+}
+.slide-fade-leave-active {
+  transition: all 0.5s;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>
 
