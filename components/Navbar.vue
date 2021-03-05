@@ -27,7 +27,7 @@
 
         <div
           v-if="dropdownOpen"
-          class="lang-dropdown absolute mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+          class="lang-dropdown border border-yellow-500 absolute mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
         >
           <a
             href="#"
