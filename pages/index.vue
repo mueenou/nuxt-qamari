@@ -232,15 +232,16 @@ input::placeholder {
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
 .slide-fade-enter-active {
-  transition: all 0.5s;
+  transition: all 0.2s ease;
 }
 .slide-fade-leave-active {
-  transition: all 0.5s;
+  transition: all 0.1s ease;
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
   transform: translateY(-20px);
   opacity: 0;
+  height: 0;
 }
 </style>
 
