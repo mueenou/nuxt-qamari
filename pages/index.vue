@@ -1,7 +1,7 @@
 <template>
   <div id="main">
-    <div class="p-3 pb-9">
-      <div class="flex space-x-3 items-center">
+    <div class="mt-5">
+      <div class="flex space-x-3 justify-between items-center">
         <input
           v-model="search"
           class="w-full border border-yellow-500 h-10 py-1 px-2 rounded focus:outline-none"
