@@ -1,5 +1,7 @@
 <template>
-  <header class="bg-white border-b sm:flex sm:justify-between sm:px-4 sm:py-3">
+  <header
+    class="bg-white border-b lg:h-16 sm:flex sm:justify-between sm:px-4 sm:py-3"
+  >
     <div class="flex justify-between items-center px-4 py-3 sm:p-0">
       <nuxt-link
         class="flex items-center justify-between font-kaushan-script text-sm text-yellow-600 tracking-widest font-bold p-2 rounded shadow-medium"
