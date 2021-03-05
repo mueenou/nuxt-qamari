@@ -4,16 +4,16 @@
       <div class="flex space-x-3 items-center">
         <input
           v-model="search"
-          class="w-full rounded border border-yellow-500 p-2 focus:outline-none"
+          class="w-full border border-yellow-500 h-10 py-1 px-2 rounded focus:outline-none"
           type="text"
           :placeholder="$t('searchPlaceholder')"
           @keyup.enter="fetchVerses"
         />
         <button
-          class="border rounded bg-white border-yellow-500 p-2 focus:outline-none font-thin hover:bg-gray-200"
+          class="border border-yellow-500 h-10 px-2 rounded focus:outline-none bg-white hover:bg-gray-200"
           @click="fetchVerses"
         >
-          <p class="font-thin text-sm">{{ $t('search') }}</p>
+          <p class="font-thin text-sm py-1">{{ $t('search') }}</p>
         </button>
       </div>
     </div>
@@ -39,7 +39,7 @@
         </h1>
         <h2>Verset {{ response.numberInSurah }}</h2>
         <blockquote
-          class="font-dancing-script text-yellow-600 text-xl mt-2"
+          class="font-kavivanar text-yellow-600 text-base mt-2"
           v-html="highlightWords(response.text)"
         ></blockquote>
         <p class="pt-3 font-thin text-xs">
@@ -221,6 +221,10 @@ input:checked ~ .toggle__dot {
   right: 0;
   bottom: 10px;
 }
+input::placeholder {
+  font-weight: lighter;
+  font-size: 0.8rem;
+}
 </style>
 
 <style>
@@ -234,5 +238,9 @@ input:checked ~ .toggle__dot {
 
 .font-kaushan-script {
   font-family: 'Kaushan Script', cursive;
+}
+
+.font-kavivanar {
+  font-family: 'Kavivanar', cursive;
 }
 </style>

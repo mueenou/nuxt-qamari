@@ -26,6 +26,14 @@ export default {
           'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&family=Kaushan+Script&display=swap',
         rel: 'stylesheet',
       },
+      {
+        href: 'https://fonts.googleapis.com/css2?family=Kavivanar&display=swap',
+        rel: 'stylesheet',
+      },
+      {
+        href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+        rel: 'stylesheet',
+      },
     ],
   },
 

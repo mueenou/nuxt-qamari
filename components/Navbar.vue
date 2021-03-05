@@ -2,20 +2,21 @@
   <header class="bg-white border-b sm:flex sm:justify-between sm:px-4 sm:py-3">
     <div class="flex justify-between items-center px-4 py-3 sm:p-0">
       <nuxt-link
-        class="font-kaushan-script text-xl text-yellow-600 tracking-widest font-bold p-2 rounded shadow-medium"
+        class="flex items-center justify-between font-kaushan-script text-sm text-yellow-600 tracking-widest font-bold p-2 rounded shadow-medium"
         :to="localePath('/')"
+        ><span
+          class="material-icons text-4xl p-1 mr-2 bg-gray-700 rounded-full"
+        >
+          landscape </span
         >{{ $store.state.title }}</nuxt-link
       >
       <div class="relative ml-2">
         <button
-          class="relative w-6 h-6 rounded-full z-10 block rounded font-semibold bg-white focus:outline-none"
+          class="relative shadow-inner w-5 h-5 rounded-full z-10 block font-semibold bg-white focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"
         >
-          <div
-            :class="`toggle__dot_${$store.state.lang} w-6 h-6 rounded-full`"
-          ></div>
+          <div :class="`toggle__dot_${$store.state.lang} w-5 h-5`"></div>
         </button>
-
         <div
           v-if="dropdownOpen"
           class="fixed inset-0 h-full w-full z-10"
@@ -28,7 +29,7 @@
         >
           <a
             href="#"
-            class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-green-500 hover:text-white"
+            class="flex justify-between block px-10 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white"
             @click="changeLang('fr')"
           >
             <div
@@ -38,7 +39,7 @@
           </a>
           <a
             href="#"
-            class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-green-500 hover:text-white"
+            class="flex justify-between block px-10 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white"
             @click="changeLang('en')"
           >
             <div
@@ -81,15 +82,23 @@
       class="px-2 pt-2 pb-4 sm:flex sm:p-0 sm:items-center sm:px-2"
     >
       <nuxt-link
-        class="block px-4 py-1 mt-1 mx-1 rounded text-black font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
+        class="flex items-center justify-between block px-2 py-1 mt-1 mx-1 rounded text-yellow-600 font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
         :to="localePath('/')"
         @click.native="isOpen = false"
+        ><span
+          class="material-icons text-yellow-500 text-lg bg-gray-600 rounded-full p-1 mr-2"
+        >
+          search </span
         >{{ $t('navbar.findWord') }}</nuxt-link
       >
       <nuxt-link
         :to="localePath('/names')"
-        class="block px-4 py-1 mt-1 mx-1 rounded text-black font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
+        class="flex items-center justify-between block px-2 py-1 mt-1 mx-1 rounded text-yellow-600 font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
         @click.native="isOpen = false"
+        ><span
+          class="material-icons text-yellow-500 text-lg bg-gray-600 rounded-full p-1 mr-2"
+        >
+          auto_awesome </span
         >{{ $t('navbar.godNames') }}</nuxt-link
       >
     </div>
