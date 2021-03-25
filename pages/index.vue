@@ -54,14 +54,14 @@
         >
           {{ $t('showArabicVerse') }}
         </button>
-        <transition name="slide-fade">
+        <transition name="slide">
           <blockquote
             v-if="showArabicVerse === index"
             class="text-2xl text-yellow-600 font-thin"
           >
             {{ thisVerse }}
             <p class="pt-3 font-thin text-xs text-black">
-              Venant de
+              Source
               <span class="font-medium">Quran.com API</span>
             </p>
           </blockquote>
@@ -231,17 +231,38 @@ input::placeholder {
 
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
-.slide-fade-enter-active {
-  transition: all 0.2s ease;
+.slide-enter-active {
+  -moz-transition-duration: 0.05s;
+  -webkit-transition-duration: 0.05s;
+  -o-transition-duration: 0.05s;
+  transition-duration: 0.05s;
+  -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
-.slide-fade-leave-active {
-  transition: all 0.1s ease;
+
+.slide-leave-active {
+  -moz-transition-duration: 0.1s;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateY(-20px);
-  opacity: 0;
-  height: 0;
+
+.slide-enter-to,
+.slide-leave {
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.slide-enter,
+.slide-leave-to {
+  overflow: hidden;
+  max-height: 0;
 }
 </style>
 
