@@ -1,16 +1,16 @@
 <template>
   <div id="main">
-    <div class="mt-5">
+    <div class="mt-5 mb-3">
       <div class="flex space-x-3 justify-between items-center">
         <input
           v-model="search"
-          class="w-full border border-yellow-500 h-10 py-1 px-2 rounded focus:outline-none"
+          class="w-full border border-yellow-500 dark:border-gray-700 h-10 py-1 px-2 rounded focus:outline-none dark:bg-gray-700 dark:text-yellow-500"
           type="text"
           :placeholder="$t('searchPlaceholder')"
           @keyup.enter="fetchVerses"
         />
         <button
-          class="border border-yellow-500 h-10 px-2 rounded focus:outline-none bg-white hover:bg-gray-200"
+          class="border border-yellow-500 h-10 px-2 rounded focus:outline-none bg-white hover:bg-gray-200 dark:bg-gray-700 dark:border-gray-800 dark:text-yellow-500 dark-hover:bg-gray-600"
           @click="fetchVerses"
         >
           <p class="font-thin text-sm py-1">{{ $t('search') }}</p>
@@ -21,33 +21,42 @@
       <div class="text-center">
         <span class="text-red-600">{{ errorMessage }}</span>
       </div>
-      <div class="bg-white p-6 border rounded-lg items-center">
-        <p class="text-gray-600 text-center" v-html="$t('welcomeMessage')"></p>
+      <div
+        class="bg-white dark:bg-gray-700 dark:border-gray-700 p-6 border rounded-lg items-center"
+      >
+        <p
+          class="text-gray-600 dark:text-gray-500 text-center"
+          v-html="$t('welcomeMessage')"
+        ></p>
       </div>
     </div>
     <div v-else class="space-y-3 text-center pl-7 pr-7 pb-7">
-      <h1 v-if="count == 1">{{ $t('foundWordCount', { count: count }) }}</h1>
-      <h1 v-else>{{ $t('foundWordsCount', { count: count }) }}</h1>
+      <h1 v-if="count == 1" class="dark:text-gray-400">
+        {{ $t('foundWordCount', { count: count }) }}
+      </h1>
+      <h1 v-else class="dark:text-gray-400">
+        {{ $t('foundWordsCount', { count: count }) }}
+      </h1>
       <div
         v-for="(response, index) in responses"
         :key="index"
-        class="bg-white p-6 border rounded-lg items-center"
+        class="bg-white dark:bg-gray-800 dark:border-gray-600 p-6 border rounded-lg items-center"
       >
-        <h1 class="text-xl font-medium text-gray-700 pb-3">
+        <h1 class="text-xl font-medium text-gray-600 pb-3">
           Sourate {{ response.surah.number }} -
           {{ response.surah.englishName }} - {{ response.surah.name }}
         </h1>
-        <h2>Verset {{ response.numberInSurah }}</h2>
+        <h2 class="text-gray-600">Verset {{ response.numberInSurah }}</h2>
         <blockquote
           class="font-kavivanar text-yellow-600 text-base mt-2"
           v-html="highlightWords(response.text)"
         ></blockquote>
-        <p class="pt-3 font-thin text-xs">
+        <p class="pt-3 font-thin text-xs dark:text-gray-900">
           {{ $t('translateBy') }}
           <span class="font-medium">{{ response.edition.englishName }}</span>
         </p>
         <button
-          class="border rounded p-1 border-yellow-500 focus:outline-none font-thin hover:bg-gray-200 mt-2 mb-4"
+          class="border rounded p-1 border-yellow-500 focus:outline-none font-thin hover:bg-gray-200 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-300 dark-hover:bg-gray-600 mt-2 mb-4"
           @click="
             getArabicVerse(response.surah.number, response.numberInSurah, index)
           "
@@ -60,7 +69,7 @@
             class="text-2xl text-yellow-600 font-thin"
           >
             {{ thisVerse }}
-            <p class="pt-3 font-thin text-xs text-black">
+            <p class="pt-3 font-thin text-xs dark:text-gray-900">
               Source
               <span class="font-medium">Quran.com API</span>
             </p>
@@ -76,7 +85,7 @@
                 type="audio/mpeg"
               />
             </audio>
-            <p class="pt-1 font-thin text-xs">
+            <p class="pt-1 font-thin text-xs dark:text-gray-900">
               {{ $t('recitedByLang') }}
               <span class="font-medium">{{ $store.state.reciter }}</span>
             </p>
@@ -88,7 +97,7 @@
                 type="audio/mpeg"
               />
             </audio>
-            <p class="pt-1 font-thin text-xs">
+            <p class="pt-1 font-thin text-xs dark:text-gray-900">
               {{ $t('recitedByArabic') }}
               <span class="font-medium">Alafasy</span>
             </p>
@@ -228,7 +237,9 @@ input::placeholder {
   font-weight: lighter;
   font-size: 0.8rem;
 }
+</style>
 
+<style>
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
 .slide-enter-active {
@@ -264,9 +275,6 @@ input::placeholder {
   overflow: hidden;
   max-height: 0;
 }
-</style>
-
-<style>
 .highlight {
   font-weight: bold;
 }

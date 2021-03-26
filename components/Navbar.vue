@@ -1,6 +1,6 @@
 <template>
   <header
-    class="bg-white border-b lg:h-16 sm:flex sm:justify-between sm:px-4 sm:py-3"
+    class="dark:bg-gray-800 bg-white border-b dark:border-gray-700 lg:h-16 sm:flex sm:justify-between sm:px-4 sm:py-3"
   >
     <div class="flex justify-between items-center px-4 py-3 sm:p-0">
       <nuxt-link
@@ -27,11 +27,11 @@
 
         <div
           v-if="dropdownOpen"
-          class="lang-dropdown border border-yellow-500 absolute mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+          class="lang-dropdown border border-yellow-500 dark:border-gray-700 absolute mt-2 py-2 w-48 bg-white dark:bg-gray-700 rounded-md shadow-xl z-20"
         >
           <a
             href="#"
-            class="flex justify-between block px-10 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white"
+            class="flex justify-between block px-10 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white dark:text-gray-900"
             @click="changeLang('fr')"
           >
             <div
@@ -41,7 +41,7 @@
           </a>
           <a
             href="#"
-            class="flex justify-between block px-10 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white"
+            class="flex justify-between block px-10 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white dark:text-gray-900"
             @click="changeLang('en')"
           >
             <div
@@ -84,31 +84,34 @@
       class="px-2 pt-2 pb-4 sm:flex sm:p-0 sm:items-center sm:px-2"
     >
       <nuxt-link
-        class="flex items-center justify-between block px-2 py-1 mt-1 mx-1 rounded text-yellow-600 font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
+        class="flex items-center justify-between block px-2 py-1 mt-1 mx-1 rounded text-yellow-600 font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200 dark:bg-gray-700 dark-hover:bg-gray-600"
         :to="localePath('/')"
         @click.native="isOpen = false"
         ><span
-          class="material-icons text-yellow-500 text-lg bg-gray-600 rounded-full p-1 mr-2"
+          class="material-icons text-yellow-500 text-lg bg-gray-600 dark:bg-gray-800 rounded-full p-1 mr-2"
         >
           search </span
         >{{ $t('navbar.findWord') }}</nuxt-link
       >
       <nuxt-link
         :to="localePath('/names')"
-        class="flex items-center justify-between block px-2 py-1 mt-1 mx-1 rounded text-yellow-600 font-thin bg-white hover:bg-gray-300 sm:mt-0 bg-gray-200"
+        class="flex items-center justify-between block px-2 py-1 mt-1 mx-1 rounded text-yellow-600 font-thin bg-white dark:bg-gray-700 hover:bg-gray-300 sm:mt-0 bg-gray-200 dark-hover:bg-gray-600"
         @click.native="isOpen = false"
         ><span
-          class="material-icons text-yellow-500 text-lg bg-gray-600 rounded-full p-1 mr-2"
+          class="material-icons text-yellow-500 text-lg bg-gray-600 dark:bg-gray-800 rounded-full p-1 mr-2"
         >
           auto_awesome </span
         >{{ $t('navbar.godNames') }}</nuxt-link
       >
+      <theme-changer-button />
     </div>
   </header>
 </template>
 
 <script>
+import ThemeChangerButton from './ThemeChangerButton.vue'
 export default {
+  components: { ThemeChangerButton },
   data() {
     return {
       isOpen: false,
