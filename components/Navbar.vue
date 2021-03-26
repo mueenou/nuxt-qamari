@@ -51,6 +51,7 @@
           </a>
         </div>
       </div>
+      <theme-changer-button />
       <div class="sm:hidden">
         <button
           type="button"
@@ -103,7 +104,6 @@
           auto_awesome </span
         >{{ $t('navbar.godNames') }}</nuxt-link
       >
-      <theme-changer-button />
     </div>
   </header>
 </template>
