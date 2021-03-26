@@ -1,22 +1,32 @@
 <template>
   <div class="mt-5">
-    <h1 class="mb-5 text-lg text-center">{{ $t('namesTitle') }}</h1>
+    <h1 class="mb-5 text-lg text-center dark:text-gray-400">
+      {{ $t('namesTitle') }}
+    </h1>
     <div
       class="names-container text-center flex flex-wrap px-16 justify-evenly overflow-hidden"
     >
       <figure
         v-for="(name, index) in allNames"
         :key="index"
-        class="bg-white border-yellow-500 border-gray-200 border flex flex-col justify-center lg:w-3/12 rounded-xl p-2 md:mx-1 lg:mx-2 my-2 w-10/12 xs:w-5/12 sm:w-5/12 sm:flex-wrap hover:border-yellow-800"
+        class="bg-white dark:bg-gray-700 dark:border-gray-600 border-yellow-500 border-gray-200 dark-hover:border-gray-400 border flex flex-col justify-center lg:w-3/12 rounded-xl p-2 md:mx-1 lg:mx-2 my-2 w-10/12 xs:w-5/12 sm:w-5/12 sm:flex-wrap dark:text-gray-400"
         @blur="showDescription = false"
         @click="showThisDescription(index)"
       >
-        <blockquote class="text-xl font-bold">{{ name.name }}</blockquote>
-        <blockquote class="font-bold">{{ name.transliteration }}</blockquote>
-        <blockquote class="text-sm">{{ name.en.meaning }}</blockquote>
-        <blockquote class="text-sm font-bold">{{ name.number }}</blockquote>
-        <transition name="fadeHeight">
-          <div v-if="showDescription === index">
+        <blockquote class="text-xl font-bold">
+          {{ name.name }}
+        </blockquote>
+        <blockquote class="font-bold">
+          {{ name.transliteration }}
+        </blockquote>
+        <blockquote class="text-sm">
+          {{ name.en.meaning }}
+        </blockquote>
+        <blockquote class="text-sm font-bold">
+          {{ name.number }}
+        </blockquote>
+        <transition name="slide">
+          <div v-if="showDescription === index" class="">
             {{ name.fr.meaning }}
           </div>
         </transition>
