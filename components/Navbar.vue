@@ -6,10 +6,8 @@
       <nuxt-link
         class="flex items-center justify-between font-kaushan-script text-sm text-yellow-600 tracking-widest font-bold p-2 rounded shadow-medium"
         :to="localePath('/')"
-        ><span
-          class="material-icons text-4xl p-1 mr-2 bg-gray-700 rounded-full"
-        >
-          landscape </span
+        ><span class="text-4xl mr-2 bg-gray-700 rounded-full object-fit">
+          <img src="../static/img/logo.png" width="40px" alt="logo" /> </span
         >{{ $store.state.title }}</nuxt-link
       >
       <div class="relative ml-2">
